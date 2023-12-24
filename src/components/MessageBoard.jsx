@@ -10,6 +10,12 @@ function MessageBoard() {
     newMessageBoard.push(message);
     setMessageBoard(newMessageBoard);
   }
+
+  function deleteMessage(messageIndex) {
+    const newMessageBoard = [...messageBoard];
+    newMessageBoard.splice(messageIndex, 1);
+    setMessageBoard(newMessageBoard);
+  }
   return (
     <div className="app-wrapper">
       <h1 class="app-title">Message board</h1>
@@ -30,22 +36,21 @@ function MessageBoard() {
         </button>
       </div>
       <div class="board">
-        <ul>
-          {messageBoard.map((item) => {
-            return (
-              <li>
-                <div className="message">
-                  <h1>{item}</h1>
-                  <button className="delete-button">x</button>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-        <div className="message">
-          <h1>Hello all ! This is first message.</h1>
-          <button className="delete-button">x</button>
-        </div>
+        {messageBoard.map((item, index) => {
+          return (
+            <div className="message">
+              <h1>{item}</h1>
+              <button
+                className="delete-button"
+                onClick={() => {
+                  deleteMessage(index);
+                }}
+              >
+                x
+              </button>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
